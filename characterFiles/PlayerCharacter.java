@@ -5,7 +5,7 @@ import java.util.*;
 public class PlayerCharacter {
     private int characterLevel;
     private int proficiencyBonus;
-    private String characterClass;
+    private ArrayList<CharacterClass> characterClasses;
     private String characterName;
     private ArrayList<Attribute> characterAttributes;
     private ArrayList<Skill> characterSkills;
@@ -13,10 +13,11 @@ public class PlayerCharacter {
     // Create a Default Character
     public PlayerCharacter() {
         characterName = "New Character";
-        characterLevel = 1;
-        characterClass = "Fighter";
-
+        characterClasses = new ArrayList<>();
+        characterClasses.add(new CharacterClass("Fighter"));
+        calculateCharacterLevel();
         calculateProficiencyBonus();
+
 
         // Initialize and add player attributes to the list
         characterAttributes = new ArrayList<>();
@@ -51,6 +52,10 @@ public class PlayerCharacter {
         Collections.addAll(characterSkills, acrobatics, animalHandling, arcana, athletics, deception, history, insight,
                 intimidation, investigation, medicine, nature, perception, performance, persuasion, religion,
                 sleightOfHand, stealth, survival);
+    }
+
+    private void calculateCharacterLevel() {
+        characterLevel = characterClasses.size();
     }
 
     private void calculateProficiencyBonus() {
@@ -91,12 +96,26 @@ public class PlayerCharacter {
     }
 
     public String toString() {
-        return String.format("Name: %s \nLevel %s %s\nAttributes:\n%s\nSkills:\n%s", getCharacterName(),
-                getCharacterLevel(), getCharacterClass(), printCharacterAttributes(), printCharacterSkills());
+        return String.format("Name: %s \nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s", getCharacterName(),
+                getCharacterLevel(), getCharacterClass(), proficiencyBonus, printCharacterAttributes(), printCharacterSkills());
     }
 
-    private String getCharacterClass() {
-        return characterClass;
+    public String getCharacterClass() {
+        return characterClasses.toString();
+    }
+
+    public void addCharacterClass(String className) {
+        characterClasses.add(new CharacterClass(className));
+        calculateCharacterLevel();
+        calculateProficiencyBonus();
+        updateSkills();
+
+    }
+
+    public void updateSkills() {
+        for (Skill skill : characterSkills) {
+            skill.calculateSkillTotal();
+        }
     }
 
     public String getCharacterName() {

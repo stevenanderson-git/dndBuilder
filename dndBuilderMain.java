@@ -2,12 +2,18 @@ import characterFiles.*;
 
 class dndBuilderMain{
     public static void main(String[] args) {
+        PlayerCharacter test = new PlayerCharacter();
+        
+        test.addCharacterClass("Ranger");
+        test.addCharacterClass("Cleric");
+        test.addCharacterClass("Barbarian");
+        test.addCharacterClass("Bard");
+        test.addCharacterClass("Paladin");
 
-        Attribute test2 = new Attribute("Test2", 9);
-        System.out.println(test2.toString());
+        test.setCharacterName("Steve");
 
-        PlayerCharacter steven = new PlayerCharacter();
-        steven.setCharacterName("Steven");
-        System.out.println(steven.toString());
+        System.out.println(test.toString());
+
+
     }
 }

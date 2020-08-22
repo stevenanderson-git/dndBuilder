@@ -21,7 +21,7 @@ public class Skill {
         skillTotal = calculateSkillTotal();
     }
 
-    private int calculateSkillTotal() {
+    public int calculateSkillTotal() {
         skillTotal = attribute.getAttributeModifier();
         //TODO: think of a way to pass in the Proficiency bonus to a skill from character level
         if (proficient)
@@ -32,6 +32,10 @@ public class Skill {
     }
     public String toString(){
         return String.format("%s [%s]%n", skillName, skillTotal);
+    }
+    public void toggleProficiency(){
+        if(proficient) proficient = false;
+        else proficient = true;
     }
 
 }
