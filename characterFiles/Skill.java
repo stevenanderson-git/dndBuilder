@@ -6,14 +6,16 @@ package characterFiles;
  */
 public class Skill {
     private Attribute attribute;
+    private int proficiencyBonus;
     private String skillName;
     private int skillTotal;
     private boolean proficient;
     private boolean expertise;
 
-    public Skill(String skillName, Attribute attribute) {
+    public Skill(String skillName, Attribute attribute, int proficiencyBonus) {
         this.skillName = skillName;
         this.attribute = attribute;
+        this.proficiencyBonus = proficiencyBonus;
         proficient = false;
         expertise = false;
         skillTotal = calculateSkillTotal();
@@ -23,13 +25,13 @@ public class Skill {
         skillTotal = attribute.getAttributeModifier();
         //TODO: think of a way to pass in the Proficiency bonus to a skill from character level
         if (proficient)
-            skillTotal = skillTotal + 1;
+            skillTotal = skillTotal + proficiencyBonus;
         if (expertise)
-            skillTotal = skillTotal + 1;
+            skillTotal = skillTotal + proficiencyBonus;
         return skillTotal;
     }
     public String toString(){
-        return String.format("Skill: %s [%s]", skillName, skillTotal);
+        return String.format("%s [%s]%n", skillName, skillTotal);
     }
 
 }

@@ -45,6 +45,6 @@ public class Attribute {
     }
 
     public String toString() {
-        return String.format("%s [%s]\t%s", attributeName, attributeScore, attributeModifier);
+        return String.format("%s [%s] %s%n", attributeName, attributeScore, attributeModifier);
     }
 }
