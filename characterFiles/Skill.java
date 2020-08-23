@@ -33,9 +33,14 @@ public class Skill {
     public String toString(){
         return String.format("%s [%s]%n", skillName, skillTotal);
     }
+    // Method for Proficiency toggle
     public void toggleProficiency(){
-        if(proficient) proficient = false;
-        else proficient = true;
+        proficient = !proficient;
+        calculateSkillTotal();
     }
-
+    // Method for Expertise toggle
+    public void toggleExpertise(){
+        expertise = !expertise;
+        calculateSkillTotal();
+    }
 }
