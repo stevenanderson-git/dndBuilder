@@ -9,6 +9,7 @@ public class PlayerCharacter {
     private String characterName;
     private ArrayList<Attribute> characterAttributes;
     private ArrayList<Skill> characterSkills;
+    private Spellbook spellbook;
 
     // Create a Default Character
     public PlayerCharacter() {
@@ -17,6 +18,7 @@ public class PlayerCharacter {
         characterClasses.add(new CharacterClass("Fighter"));
         calculateCharacterLevel();
         calculateProficiencyBonus();
+        spellbook = new Spellbook();
 
 
         // Initialize and add player attributes to the list
