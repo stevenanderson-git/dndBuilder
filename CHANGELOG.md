@@ -2,7 +2,7 @@
 Added
 * CHANGELOG.md created.
 * Die.java for creation of an RNG element. Can be used to roll hitdie, attacks, inspiration
-* Added Race.java to hold player race.
+* Changed Race -> Heritage as 5e information suggests that change will occur
 * Added Boolean inspiration and inspirationToggle(). Inspiration will be scaled/calculated based on playerLevel
 * Created CharacterClassList to easily manage classes and have custom sorting
     - CharacterClasslist still in progress

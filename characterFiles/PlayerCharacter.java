@@ -7,7 +7,7 @@ public class PlayerCharacter {
     private int proficiencyBonus;
     private CharacterClassList characterClasses;
     private String characterName;
-    private Race characterRace;
+    private Heritage characterRace;
     private ArrayList<Attribute> characterAttributes;
     private ArrayList<Skill> characterSkills;
     private Spellbook spellbook;
@@ -28,7 +28,7 @@ public class PlayerCharacter {
         // create a blank spellbook, may not be used for all characters
         spellbook = new Spellbook();
         // TODO: change race to use an interface
-        characterRace = new Race();
+        characterRace = new Heritage();
         // characters start with no inspiration;
         inspiration = false;
 

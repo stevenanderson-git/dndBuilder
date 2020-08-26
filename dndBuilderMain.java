@@ -5,6 +5,8 @@ class dndBuilderMain{
         PlayerCharacter test = new PlayerCharacter();
         
         test.addCharacterClass("Ranger");
+        test.addCharacterClass("Fighter");
+        test.addCharacterClass("Fighter");
         test.addCharacterClass("Cleric");
         test.addCharacterClass("Barbarian");
         test.addCharacterClass("Bard");

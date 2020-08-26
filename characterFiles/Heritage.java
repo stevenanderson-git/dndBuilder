@@ -1,16 +1,16 @@
 package characterFiles;
 
-public class Race {
+public class Heritage {
     //TODO: change race to use an interface
     private String raceName;
     private String raceDescription;
 
-    public Race(String raceName){
+    public Heritage(String raceName){
         this.raceName = raceName;
         raceDescription = "";
     }
     //DEFAULT RACE
-    public Race(){
+    public Heritage(){
         raceName = "Human";
         raceDescription = "Empty - Please add Details";
     }
