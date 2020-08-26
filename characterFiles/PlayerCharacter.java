@@ -7,9 +7,11 @@ public class PlayerCharacter {
     private int proficiencyBonus;
     private ArrayList<CharacterClass> characterClasses;
     private String characterName;
+    private Race characterRace;
     private ArrayList<Attribute> characterAttributes;
     private ArrayList<Skill> characterSkills;
     private Spellbook spellbook;
+    private Boolean inspiration;
 
     // Create a Default Character
     public PlayerCharacter() {
@@ -19,7 +21,10 @@ public class PlayerCharacter {
         calculateCharacterLevel();
         calculateProficiencyBonus();
         spellbook = new Spellbook();
-
+        // TODO: change race to use an interface
+        characterRace = new Race();
+        // characters start with no inspiration;
+        inspiration = false;
 
         // Initialize and add player attributes to the list
         characterAttributes = new ArrayList<>();
@@ -54,6 +59,11 @@ public class PlayerCharacter {
         Collections.addAll(characterSkills, acrobatics, animalHandling, arcana, athletics, deception, history, insight,
                 intimidation, investigation, medicine, nature, perception, performance, persuasion, religion,
                 sleightOfHand, stealth, survival);
+    }
+
+    public void toggleInspiration() {
+        inspiration = !inspiration;
+        // TODO: send call to control to update visual
     }
 
     private void calculateCharacterLevel() {
@@ -98,8 +108,9 @@ public class PlayerCharacter {
     }
 
     public String toString() {
-        return String.format("Name: %s \nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s", getCharacterName(),
-                getCharacterLevel(), getCharacterClass(), proficiencyBonus, printCharacterAttributes(), printCharacterSkills());
+        return String.format("Name: %s \nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s",
+                getCharacterName(), getCharacterLevel(), getCharacterClass(), proficiencyBonus,
+                printCharacterAttributes(), printCharacterSkills());
     }
 
     public String getCharacterClass() {
