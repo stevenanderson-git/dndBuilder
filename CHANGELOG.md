@@ -1,3 +1,15 @@
+2020-08-27
+Added
+* Finished Spell.toString()
+* Comparable interface added to Spell.java
+* Changed Attribute and Skill lists to Array[]
+
+
+
+
+
+
+
 2020-08-26
 Added
 * CHANGELOG.md created.

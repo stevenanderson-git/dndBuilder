@@ -32,42 +32,42 @@ public class PlayerCharacter {
         // characters start with no inspiration;
         inspiration = false;
 
-
     }
-    public void defaultAttributes(){
-                // Initialize and add player attributes to the list
-                characterAttributes = new ArrayList<>();
-                Attribute strength = new Attribute("Strength", 10);
-                Attribute dexterity = new Attribute("Dexterity", 10);
-                Attribute constitution = new Attribute("Constitution", 10);
-                Attribute wisdom = new Attribute("Wisdom", 10);
-                Attribute intelligence = new Attribute("Intelligence", 10);
-                Attribute charisma = new Attribute("Charisma", 10);
-                Collections.addAll(characterAttributes, strength, dexterity, constitution, wisdom, intelligence, charisma);
-        
-                // Initialize and add Player skills to the list
-                characterSkills = new ArrayList<>();
-                Skill acrobatics = new Skill("Acrobatics", dexterity, proficiencyBonus);
-                Skill animalHandling = new Skill("Animal Handling", wisdom, proficiencyBonus);
-                Skill arcana = new Skill("Arcana", intelligence, proficiencyBonus);
-                Skill athletics = new Skill("Athletics", strength, proficiencyBonus);
-                Skill deception = new Skill("Deception", charisma, proficiencyBonus);
-                Skill history = new Skill("History", intelligence, proficiencyBonus);
-                Skill insight = new Skill("Insight", wisdom, proficiencyBonus);
-                Skill intimidation = new Skill("Intimidation", charisma, proficiencyBonus);
-                Skill investigation = new Skill("Investigation", intelligence, proficiencyBonus);
-                Skill medicine = new Skill("Medicine", wisdom, proficiencyBonus);
-                Skill nature = new Skill("Nature", intelligence, proficiencyBonus);
-                Skill perception = new Skill("Perception", wisdom, proficiencyBonus);
-                Skill performance = new Skill("Performance", charisma, proficiencyBonus);
-                Skill persuasion = new Skill("Persuasion", charisma, proficiencyBonus);
-                Skill religion = new Skill("Religion", intelligence, proficiencyBonus);
-                Skill sleightOfHand = new Skill("Sleight of Hand", dexterity, proficiencyBonus);
-                Skill stealth = new Skill("Stealth", dexterity, proficiencyBonus);
-                Skill survival = new Skill("Survival", wisdom, proficiencyBonus);
-                Collections.addAll(characterSkills, acrobatics, animalHandling, arcana, athletics, deception, history, insight,
-                        intimidation, investigation, medicine, nature, perception, performance, persuasion, religion,
-                        sleightOfHand, stealth, survival);
+
+    public void defaultAttributes() {
+        // Initialize and add player attributes to the list
+        characterAttributes = new ArrayList<>();
+        Attribute strength = new Attribute("Strength", 10);
+        Attribute dexterity = new Attribute("Dexterity", 10);
+        Attribute constitution = new Attribute("Constitution", 10);
+        Attribute wisdom = new Attribute("Wisdom", 10);
+        Attribute intelligence = new Attribute("Intelligence", 10);
+        Attribute charisma = new Attribute("Charisma", 10);
+        Collections.addAll(characterAttributes, strength, dexterity, constitution, wisdom, intelligence, charisma);
+
+        // Initialize and add Player skills to the list
+        characterSkills = new ArrayList<>();
+        Skill acrobatics = new Skill("Acrobatics", dexterity, proficiencyBonus);
+        Skill animalHandling = new Skill("Animal Handling", wisdom, proficiencyBonus);
+        Skill arcana = new Skill("Arcana", intelligence, proficiencyBonus);
+        Skill athletics = new Skill("Athletics", strength, proficiencyBonus);
+        Skill deception = new Skill("Deception", charisma, proficiencyBonus);
+        Skill history = new Skill("History", intelligence, proficiencyBonus);
+        Skill insight = new Skill("Insight", wisdom, proficiencyBonus);
+        Skill intimidation = new Skill("Intimidation", charisma, proficiencyBonus);
+        Skill investigation = new Skill("Investigation", intelligence, proficiencyBonus);
+        Skill medicine = new Skill("Medicine", wisdom, proficiencyBonus);
+        Skill nature = new Skill("Nature", intelligence, proficiencyBonus);
+        Skill perception = new Skill("Perception", wisdom, proficiencyBonus);
+        Skill performance = new Skill("Performance", charisma, proficiencyBonus);
+        Skill persuasion = new Skill("Persuasion", charisma, proficiencyBonus);
+        Skill religion = new Skill("Religion", intelligence, proficiencyBonus);
+        Skill sleightOfHand = new Skill("Sleight of Hand", dexterity, proficiencyBonus);
+        Skill stealth = new Skill("Stealth", dexterity, proficiencyBonus);
+        Skill survival = new Skill("Survival", wisdom, proficiencyBonus);
+        Collections.addAll(characterSkills, acrobatics, animalHandling, arcana, athletics, deception, history, insight,
+                intimidation, investigation, medicine, nature, perception, performance, persuasion, religion,
+                sleightOfHand, stealth, survival);
     }
 
     public void toggleInspiration() {
@@ -111,13 +111,23 @@ public class PlayerCharacter {
                 proficiencyBonus = 2;
         }
     }
-    public boolean addLevel(CharacterClass newClass){
 
-        return true;
+    public boolean addLevel(CharacterClass newClass) {
+        try {
+            characterClasses.add(newClass);
+            // TODO: Roll hit dice, check if spells need to be added
+            updateCharacterLevel(characterClasses.getCharacterLevel());
+            calculateProficiencyBonus();
+            updateSkills();
+            return true;
+        } catch (Exception e) {
+            System.out.println("addLevel Error " + e.toString());
+            return false;
+        }
     }
 
     public String toString() {
-        return String.format("Name: %s \nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s",
+        return String.format("Name: %s %nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s",
                 getCharacterName(), getCharacterLevel(), getCharacterClass(), proficiencyBonus,
                 printCharacterAttributes(), printCharacterSkills());
     }
@@ -126,14 +136,7 @@ public class PlayerCharacter {
         return characterClasses.toString();
     }
 
-    public void addCharacterClass(String className) {
-        characterClasses.add(new CharacterClass(className));
-        updateCharacterLevel(characterClasses.getCharacterLevel());
-        calculateProficiencyBonus();
-        updateSkills();
-
-    }
-    private void updateCharacterLevel(int characterLevel){
+    private void updateCharacterLevel(int characterLevel) {
         this.characterLevel = characterLevel;
     }
 

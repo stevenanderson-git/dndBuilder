@@ -8,11 +8,13 @@ public class Spellbook {
     }
     public void sortSpellBook(){
         //TODO: implement sorting by Spell Level
+        Collections.sort(spellList);
     }
     public boolean addSpell(Spell newSpell){
         //TODO: check that the Contains method properly compares spells based on name
         if(!spellList.contains(newSpell)){
             spellList.add(newSpell);
+            sortSpellBook();
             return true;
         }
         return false;
