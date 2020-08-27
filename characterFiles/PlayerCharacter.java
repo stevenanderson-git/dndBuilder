@@ -3,71 +3,57 @@ package characterFiles;
 import java.util.*;
 
 public class PlayerCharacter {
-    private int characterLevel;
-    private int proficiencyBonus;
-    private CharacterClassList characterClasses;
-    private String characterName;
-    private Heritage characterRace;
-    private ArrayList<Attribute> characterAttributes;
-    private ArrayList<Skill> characterSkills;
-    private Spellbook spellbook;
     private Boolean inspiration;
+    private String characterName;
+    private Heritage heritage;
+    private Attribute[] attributes;
+    private Skill[] skills;
+    private Spellbook spellbook;
+    private LevelList levelList;
 
     // Create a Default Character
     public PlayerCharacter() {
-        // Blank Name for character
         characterName = "New Character";
-        // Create new Class list
-        characterClasses = new CharacterClassList();
-        // Set base Attributes and Skills
-        defaultAttributes();
-        // Base level, should be 0
-        updateCharacterLevel(characterClasses.getCharacterLevel());
-        // Base proficiency should be 0
-        calculateProficiencyBonus();
-        // create a blank spellbook, may not be used for all characters
+        levelList = new LevelList();
         spellbook = new Spellbook();
-        // TODO: change race to use an interface
-        characterRace = new Heritage();
-        // characters start with no inspiration;
-        inspiration = false;
-
-    }
-
-    public void defaultAttributes() {
-        // Initialize and add player attributes to the list
-        characterAttributes = new ArrayList<>();
+        heritage = new Heritage();
+        // Initialize and add player attributes to the array
         Attribute strength = new Attribute("Strength", 10);
         Attribute dexterity = new Attribute("Dexterity", 10);
         Attribute constitution = new Attribute("Constitution", 10);
-        Attribute wisdom = new Attribute("Wisdom", 10);
         Attribute intelligence = new Attribute("Intelligence", 10);
+        Attribute wisdom = new Attribute("Wisdom", 10);
         Attribute charisma = new Attribute("Charisma", 10);
-        Collections.addAll(characterAttributes, strength, dexterity, constitution, wisdom, intelligence, charisma);
+        attributes = new Attribute[] { strength, dexterity, constitution, intelligence, wisdom, charisma };
 
-        // Initialize and add Player skills to the list
-        characterSkills = new ArrayList<>();
-        Skill acrobatics = new Skill("Acrobatics", dexterity, proficiencyBonus);
-        Skill animalHandling = new Skill("Animal Handling", wisdom, proficiencyBonus);
-        Skill arcana = new Skill("Arcana", intelligence, proficiencyBonus);
-        Skill athletics = new Skill("Athletics", strength, proficiencyBonus);
-        Skill deception = new Skill("Deception", charisma, proficiencyBonus);
-        Skill history = new Skill("History", intelligence, proficiencyBonus);
-        Skill insight = new Skill("Insight", wisdom, proficiencyBonus);
-        Skill intimidation = new Skill("Intimidation", charisma, proficiencyBonus);
-        Skill investigation = new Skill("Investigation", intelligence, proficiencyBonus);
-        Skill medicine = new Skill("Medicine", wisdom, proficiencyBonus);
-        Skill nature = new Skill("Nature", intelligence, proficiencyBonus);
-        Skill perception = new Skill("Perception", wisdom, proficiencyBonus);
-        Skill performance = new Skill("Performance", charisma, proficiencyBonus);
-        Skill persuasion = new Skill("Persuasion", charisma, proficiencyBonus);
-        Skill religion = new Skill("Religion", intelligence, proficiencyBonus);
-        Skill sleightOfHand = new Skill("Sleight of Hand", dexterity, proficiencyBonus);
-        Skill stealth = new Skill("Stealth", dexterity, proficiencyBonus);
-        Skill survival = new Skill("Survival", wisdom, proficiencyBonus);
-        Collections.addAll(characterSkills, acrobatics, animalHandling, arcana, athletics, deception, history, insight,
-                intimidation, investigation, medicine, nature, perception, performance, persuasion, religion,
-                sleightOfHand, stealth, survival);
+        // Initialize and add Player skills to the array
+        Skill acrobatics = new Skill("Acrobatics", attributes[1], levelList.getProficiencyBonus());
+        Skill animalHandling = new Skill("Animal Handling", attributes[4], levelList.getProficiencyBonus());
+        Skill arcana = new Skill("Arcana", attributes[3], levelList.getProficiencyBonus());
+        Skill athletics = new Skill("Athletics", attributes[0], levelList.getProficiencyBonus());
+        Skill deception = new Skill("Deception", attributes[5], levelList.getProficiencyBonus());
+        Skill history = new Skill("History", attributes[3], levelList.getProficiencyBonus());
+        Skill insight = new Skill("Insight", attributes[4], levelList.getProficiencyBonus());
+        Skill intimidation = new Skill("Intimidation", attributes[5], levelList.getProficiencyBonus());
+        Skill investigation = new Skill("Investigation", attributes[3], levelList.getProficiencyBonus());
+        Skill medicine = new Skill("Medicine", attributes[4], levelList.getProficiencyBonus());
+        Skill nature = new Skill("Nature", attributes[3], levelList.getProficiencyBonus());
+        Skill perception = new Skill("Perception", attributes[4], levelList.getProficiencyBonus());
+        Skill performance = new Skill("Performance", attributes[5], levelList.getProficiencyBonus());
+        Skill persuasion = new Skill("Persuasion", attributes[5], levelList.getProficiencyBonus());
+        Skill religion = new Skill("Religion", attributes[3], levelList.getProficiencyBonus());
+        Skill sleightOfHand = new Skill("Sleight of Hand", attributes[1], levelList.getProficiencyBonus());
+        Skill stealth = new Skill("Stealth", attributes[1], levelList.getProficiencyBonus());
+        Skill survival = new Skill("Survival", attributes[4], levelList.getProficiencyBonus());
+        skills = new Skill[] { acrobatics, animalHandling, arcana, athletics, deception, history, insight, intimidation,
+                investigation, medicine, nature, perception, performance, persuasion, religion, sleightOfHand, stealth,
+                survival };
+    }
+
+    private void updateSkills() {
+        for (int i = 0; i < skills.length; ++i) {
+            skills[i].calculateSkillTotal(levelList.getProficiencyBonus());
+        }
     }
 
     public void toggleInspiration() {
@@ -75,50 +61,25 @@ public class PlayerCharacter {
         // TODO: send call to control to update visual
     }
 
-    private void calculateProficiencyBonus() {
-        switch (characterLevel) {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                proficiencyBonus = 2;
-                break;
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-                proficiencyBonus = 3;
-                break;
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-                proficiencyBonus = 4;
-                break;
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-                proficiencyBonus = 5;
-                break;
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-                proficiencyBonus = 6;
-                break;
-            default:
-                proficiencyBonus = 2;
+    /**
+     * Valid indexies are 0, 1, 2, 3, 4, 5
+     * 
+     * @param attributeIndex
+     * @param attributeScore
+     */
+    public void setAttributeScore(int attributeIndex, int attributeScore) {
+        try {
+            attributes[attributeIndex].setScore(attributeScore);
+            updateSkills();
+        } catch (Exception e) {
+            System.out.println("Invalid Index " + e.toString());
         }
     }
 
     public boolean addLevel(CharacterClass newClass) {
         try {
-            characterClasses.add(newClass);
+            levelList.add(newClass);
             // TODO: Roll hit dice, check if spells need to be added
-            updateCharacterLevel(characterClasses.getCharacterLevel());
-            calculateProficiencyBonus();
-            updateSkills();
             return true;
         } catch (Exception e) {
             System.out.println("addLevel Error " + e.toString());
@@ -126,24 +87,11 @@ public class PlayerCharacter {
         }
     }
 
+    @Override
     public String toString() {
         return String.format("Name: %s %nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s",
-                getCharacterName(), getCharacterLevel(), getCharacterClass(), proficiencyBonus,
+                getCharacterName(), getCharacterLevel(), levelList.toString(), levelList.getProficiencyBonus(),
                 printCharacterAttributes(), printCharacterSkills());
-    }
-
-    public String getCharacterClass() {
-        return characterClasses.toString();
-    }
-
-    private void updateCharacterLevel(int characterLevel) {
-        this.characterLevel = characterLevel;
-    }
-
-    public void updateSkills() {
-        for (Skill skill : characterSkills) {
-            skill.calculateSkillTotal();
-        }
     }
 
     public String getCharacterName() {
@@ -151,31 +99,23 @@ public class PlayerCharacter {
     }
 
     public int getCharacterLevel() {
-        return characterLevel;
-    }
-
-    public List getCharacterAttributes() {
-        return characterAttributes;
+        return levelList.getCharacterLevel();
     }
 
     public String printCharacterAttributes() {
-        String output = "";
-        for (Attribute attribute : characterAttributes) {
-            output = output + attribute.toString();
+        StringBuilder attributeString = new StringBuilder("");
+        for (int i = 0; i < attributes.length; ++i) {
+            attributeString.append(attributes[i].toString());
         }
-        return output;
-    }
-
-    public List getCharacterSkills() {
-        return characterSkills;
+        return attributeString.toString();
     }
 
     public String printCharacterSkills() {
-        String output = "";
-        for (Skill skill : characterSkills) {
-            output = output + skill.toString();
+        StringBuilder skillString = new StringBuilder("");
+        for (int i = 0; i < skills.length; ++i) {
+            skillString.append(skills[i].toString());
         }
-        return output;
+        return skillString.toString();
     }
 
     public void setCharacterName(String characterName) {

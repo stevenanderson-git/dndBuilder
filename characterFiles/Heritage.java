@@ -1,5 +1,7 @@
 package characterFiles;
-
+/**
+ * Heritage was known as Race in previous versions of D&D
+ */
 public class Heritage {
     //TODO: change race to use an interface
     private String raceName;

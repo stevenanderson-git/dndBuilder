@@ -3,6 +3,8 @@ Added
 * Finished Spell.toString()
 * Comparable interface added to Spell.java
 * Changed Attribute and Skill lists to Array[]
+Changes
+* Attribute Class has been finilized as of 0.1.Alpha
 
 
 
