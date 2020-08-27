@@ -23,10 +23,16 @@ public class Skill {
         skillTotal = calculateSkillTotal(proficiencyBonus);
     }
 
+    /**
+     * Needs integer describing proficiency bonus. This can be found from the
+     * levelList.getCharacterLevel() method. Checks if the skill is proficient and
+     * expertise.
+     * 
+     * @param proficiencyBonus
+     * @return total value of skill including any bonuses
+     */
     public int calculateSkillTotal(int proficiencyBonus) {
         skillTotal = attribute.getAttributeModifier();
-        // TODO: think of a way to pass in the Proficiency bonus to a skill from
-        // character level
         if (proficient)
             skillTotal = skillTotal + proficiencyBonus;
         if (expertise)
@@ -34,20 +40,52 @@ public class Skill {
         return skillTotal;
     }
 
+    public String getSkillName() {
+        return skillName;
+    }
+
+    @Override
     public String toString() {
-        return String.format("%s [%s]%n", skillName, skillTotal);
+        return String.format("%s [%s] Proficient: %s Expertise: %s%n", skillName, skillTotal, proficient, expertise);
     }
 
     // Method for Proficiency toggle
     public void toggleProficiency(int proficiencyBonus) {
-        proficient = !proficient;
-        calculateSkillTotal(proficiencyBonus);
+        if (expertise) {
+            System.out.println("Toggle expertise first!");
+        } else {
+            proficient = !proficient;
+            calculateSkillTotal(proficiencyBonus);
+        }
+
     }
 
     // Method for Expertise toggle
-    // TODO: add check to verify player is proficient before allowing expertise
     public void toggleExpertise(int proficiencyBonus) {
-        expertise = !expertise;
-        calculateSkillTotal(proficiencyBonus);
+        // Verify if the skill is already proficient
+        if (proficient) {
+            expertise = !expertise;
+            calculateSkillTotal(proficiencyBonus);
+        } else {
+            System.out.println("Not proficient");
+        }
+    }
+
+    /**
+     * Access status of Skill Proficiency
+     * 
+     * @return boolean
+     */
+    public boolean skillProficient() {
+        return proficient;
+    }
+
+    /**
+     * Access status of Skill Expertise
+     * 
+     * @return boolean
+     */
+    public boolean skillExpertise() {
+        return expertise;
     }
 }

@@ -1,6 +1,10 @@
 package characterFiles;
 
-public class Spell implements Comparable<Spell>{
+/**
+ * Version: 0.1.Alpha 2020/08/27 Steven Anderson
+ */
+
+public class Spell implements Comparable<Spell> {
     private String spellName;
     private int spellLevel;
     private String spellSchool;
@@ -8,15 +12,6 @@ public class Spell implements Comparable<Spell>{
     private String spellDescription;
     private boolean prepared;
 
-    /**
-     * The fields should be populated by the GUI form
-     * 
-     * @param spellName
-     * @param spellLevel
-     * @param spellSchool
-     * @param castingTime
-     * @param spellDescription
-     */
     public Spell(String spellName, int spellLevel, String spellSchool, String castingTime, String spellDescription) {
         this.spellName = spellName;
         this.spellLevel = spellLevel;
@@ -41,19 +36,21 @@ public class Spell implements Comparable<Spell>{
         return String.format("%s%n%s %s%nCasting Time: %s%nPrepared: %s%n%s", spellName, spellSchool, getSpellLevel(),
                 castingTime, prepared, spellDescription);
     }
-    public String getSpellName(){
+
+    public String getSpellName() {
         return spellName;
     }
 
     /**
      * Should compare spells. Spells of same level should be sorted alphabetically
+     * 
      * @param spell
      * @return
      */
     @Override
     public int compareTo(Spell spell) {
         // TODO Auto-generated method stub
-        if(spell.getSpellLevel().equals(this.getSpellLevel())){
+        if (spell.getSpellLevel().equals(this.getSpellLevel())) {
             return spell.getSpellName().compareToIgnoreCase(this.getSpellName());
         }
         return spell.getSpellLevel().compareToIgnoreCase(this.getSpellLevel());

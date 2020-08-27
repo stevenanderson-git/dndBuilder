@@ -3,12 +3,13 @@ Added
 * Finished Spell.toString()
 * Comparable interface added to Spell.java
 * Changed Attribute and Skill lists to Array[]
-Changes
+* Added playerClassFiles for future implementation
 * Attribute Class has been finilized as of 0.1.Alpha
-
-
-
-
+* Skills Class ahs been finalized as of 0.1.Alpha
+* Added version and name at the header of each file (Version: 0.1.Alpha 2020/08/27 Steven Anderson)
+Updated
+* Readme
+* added notes in empty folders for understanding future use
 
 
 

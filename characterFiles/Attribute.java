@@ -28,8 +28,6 @@ public class Attribute {
      * Update the modifier. Call this each time the score changes.
      */
     private void updateModifier() {
-        // Calculates modifier based on score, if the modifier is >=10 the result is
-        // positive, otherwise negative
         attributeModifier = Math.floorDiv((attributeScore - 10),2);
     }
 

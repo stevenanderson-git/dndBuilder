@@ -1,6 +1,8 @@
 package characterFiles;
 
 /**
+ * Version: 0.1.Alpha 2020/08/27 Steven Anderson
+ * 
  * The LevelList will hold all the classes and levels to a maximum of 20
  * 
  */

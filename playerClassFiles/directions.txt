@@ -1,0 +1,5 @@
+Version: 0.1.Alpha 2020/08/27 Steven Anderson
+
+Player class files will have the information about classes in an easily readable file format such as markdown or CSV.
+This will be decided upon in the future. When the application opens, it will load the pre-populated files for each class.
+The CharacterClass or LevelList classes will be in control of this folder.

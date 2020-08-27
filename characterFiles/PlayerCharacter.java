@@ -1,6 +1,12 @@
 package characterFiles;
 
-import java.util.*;
+/**
+ * Version: 0.1.Alpha 2020/08/27 Steven Anderson
+ * 
+ * The player character class directly interfaces with the GUI. It should be the
+ * only class that requires access. All accessor and mutators are in the player
+ * character class.
+ */
 
 public class PlayerCharacter {
     private Boolean inspiration;
@@ -16,7 +22,7 @@ public class PlayerCharacter {
         characterName = "New Character";
         levelList = new LevelList();
         spellbook = new Spellbook();
-        heritage = new Heritage();
+        heritage = new Heritage("Human");
         // Initialize and add player attributes to the array
         Attribute strength = new Attribute("Strength", 10);
         Attribute dexterity = new Attribute("Dexterity", 10);
@@ -50,19 +56,8 @@ public class PlayerCharacter {
                 survival };
     }
 
-    private void updateSkills() {
-        for (int i = 0; i < skills.length; ++i) {
-            skills[i].calculateSkillTotal(levelList.getProficiencyBonus());
-        }
-    }
-
-    public void toggleInspiration() {
-        inspiration = !inspiration;
-        // TODO: send call to control to update visual
-    }
-
     /**
-     * Valid indexies are 0, 1, 2, 3, 4, 5
+     * Valid indexies are 0 -> 5
      * 
      * @param attributeIndex
      * @param attributeScore
@@ -76,9 +71,106 @@ public class PlayerCharacter {
         }
     }
 
-    public boolean addLevel(CharacterClass newClass) {
+    /**
+     * Call when all skills need to be updated from a change
+     */
+    private void updateSkills() {
+        for (int i = 0; i < skills.length; ++i) {
+            skills[i].calculateSkillTotal(levelList.getProficiencyBonus());
+        }
+    }
+
+    /**
+     * Accessor method for GUI, valid indexies are 0 -> 17
+     * 
+     * @param skillIndex
+     * @return skillName
+     */
+    public String getSkillName(int skillIndex) {
         try {
-            levelList.add(newClass);
+            return skills[skillIndex].getSkillName();
+        } catch (Exception e) {
+            // TODO: handle exception
+            return "Array out of bounds " + e.toString();
+        }
+    }
+
+    /**
+     * Accessor method for GUI, valid indexies are 0 -> 17
+     * 
+     * @param skillIndex
+     * @return skillScore
+     */
+    public String getSkillScore(int skillIndex) {
+        try {
+            return String.valueOf(skills[skillIndex].calculateSkillTotal(levelList.getProficiencyBonus()));
+        } catch (Exception e) {
+            // TODO: handle exception
+            return "Array out of bounds " + e.toString();
+        }
+    }
+
+    /**
+     * Access skill Proficiency for GUI. Valid indexies are 0 -> 17
+     * 
+     * @param skillIndex
+     * @return boolean
+     */
+    public boolean skillProficient(int skillIndex) {
+        return skills[skillIndex].skillProficient();
+    }
+
+    /**
+     * Access Skill Expertise for GUI. Valid indexies are 0 -> 17
+     * 
+     * @param skillIndex
+     * @return boolean
+     */
+    public boolean skillExpertise(int skillIndex) {
+        return skills[skillIndex].skillExpertise();
+    }
+
+    /**
+     * Accessor method for gui, valid indexies are 0 -> 17
+     * 
+     * @param skillIndex
+     */
+    public void toggleSkillProficiency(int skillIndex) {
+        try {
+            skills[skillIndex].toggleProficiency(levelList.getProficiencyBonus());
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.toString());
+        }
+    }
+
+    /**
+     * Accessor method for gui, valid indexies are 0 - skillIndex.length
+     * 
+     * @param skillIndex
+     */
+    public void toggleSkillExpertiese(int skillIndex) {
+        try {
+            skills[skillIndex].toggleExpertise(levelList.getProficiencyBonus());
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.toString());
+        }
+    }
+
+    /**
+     * Input a string for a class. Future implementation will ask to create a new
+     * class or will find existing classes from memory
+     * 
+     * @param className
+     * @return returns true if successful, false if max levels
+     */
+    public boolean addLevel(String className) {
+        // TODO: add more depth to character class system. import of various classes
+        // have classes be handled independently, possibly by adding them into a
+        // classesFolder
+        try {
+            levelList.add(new CharacterClass(className));
             // TODO: Roll hit dice, check if spells need to be added
             return true;
         } catch (Exception e) {
@@ -87,38 +179,58 @@ public class PlayerCharacter {
         }
     }
 
-    @Override
-    public String toString() {
-        return String.format("Name: %s %nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s",
-                getCharacterName(), getCharacterLevel(), levelList.toString(), levelList.getProficiencyBonus(),
-                printCharacterAttributes(), printCharacterSkills());
+    /**
+     * Mutator method to change character name
+     * 
+     * @param characterName
+     */
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
     }
 
+    /**
+     * Accessor Method for GUI
+     * 
+     * @return String Character Name
+     */
     public String getCharacterName() {
         return characterName;
     }
 
-    public int getCharacterLevel() {
-        return levelList.getCharacterLevel();
+    /**
+     * Accessor method for GUI
+     * 
+     * @return String of the Character Level
+     */
+    public String getCharacterLevel() {
+        return String.valueOf(levelList.getCharacterLevel());
     }
 
-    public String printCharacterAttributes() {
-        StringBuilder attributeString = new StringBuilder("");
-        for (int i = 0; i < attributes.length; ++i) {
-            attributeString.append(attributes[i].toString());
+    /**
+     * Inspration cannot stack
+     */
+    public void toggleInspiration() {
+        inspiration = !inspiration;
+        // TODO: send call to control to update visual
+    }
+
+    /**
+     * Iterate through an array
+     * 
+     * @return StringBuilder String of Objects' toString
+     */
+    private String printArray(Object[] o) {
+        StringBuilder arrayString = new StringBuilder("");
+        for (int i = 0; i < o.length; ++i) {
+            arrayString.append(o[i].toString());
         }
-        return attributeString.toString();
+        return arrayString.toString();
     }
 
-    public String printCharacterSkills() {
-        StringBuilder skillString = new StringBuilder("");
-        for (int i = 0; i < skills.length; ++i) {
-            skillString.append(skills[i].toString());
-        }
-        return skillString.toString();
-    }
-
-    public void setCharacterName(String characterName) {
-        this.characterName = characterName;
+    @Override
+    public String toString() {
+        return String.format("Name: %s %nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s",
+                getCharacterName(), getCharacterLevel(), levelList.toString(), levelList.getProficiencyBonus(),
+                printArray(attributes), printArray(skills));
     }
 }
