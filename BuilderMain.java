@@ -20,6 +20,13 @@ class BuilderMain {
         test.addLevel("Ronin");
         test.addLevel("Fighter");
         test.addLevel("Ranger");
+        test.toggleSkillExpertiese(10);
+
+        test.toggleSkillProficiency(9);
+        test.toggleSkillExpertiese(9);
+
+
+
 
         System.out.println(test.toString());
 
