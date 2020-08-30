@@ -1,4 +1,5 @@
-import characterFiles.PlayerCharacter;
+import characterbuilder.PlayerCharacter;
+import spellbuilder.SpellScribe;
 
 /**
  * Version: 0.1.Alpha 2020/08/27 Steven Anderson
@@ -7,8 +8,18 @@ import characterFiles.PlayerCharacter;
  */
 class BuilderMain {
     public static void main(String[] args) {
-        PlayerCharacter test = new PlayerCharacter();
+        testPlayerCharacter();
+    }
 
+    private static void testSpellScribe() {
+        // TODO: delete after program is complete
+        SpellScribe lectern = new SpellScribe();
+
+    }
+
+    private static void testPlayerCharacter() {
+        // TODO: Delete this after program is complete
+        PlayerCharacter test = new PlayerCharacter();
         test.setCharacterName("Steve");
         test.setAttributeScore(0, 20);
         test.setAttributeScore(1, 12);
@@ -21,19 +32,8 @@ class BuilderMain {
         test.addLevel("Fighter");
         test.addLevel("Ranger");
         test.toggleSkillExpertiese(10);
-
         test.toggleSkillProficiency(9);
         test.toggleSkillExpertiese(9);
-
-
-
-
         System.out.println(test.toString());
-
-        System.out.println(test.getSkillName(0));
-        System.out.println(test.getSkillName(10));
-        System.out.println(test.getSkillName(70));
-        System.out.println(test.getSkillName(9));
-
     }
 }

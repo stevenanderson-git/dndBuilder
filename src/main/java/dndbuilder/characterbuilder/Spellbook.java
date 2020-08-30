@@ -1,10 +1,14 @@
-package characterFiles;
+package characterbuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import spellbuilder.Spell;
 
 /**
- * Version: 0.1.Alpha 2020/08/27 Steven Anderson
+ * Version: 0.1.Alpha 2020/08/27 Steven Anderson The Spellbook holds all the
+ * spells a player will have. It is possible for a character to have multiple
+ * spellbooks depending on classes. In the future, spellbooks will be created
+ * based on class/heritage/feats.
  */
 public class Spellbook {
     private ArrayList<Spell> spellList;
@@ -26,5 +30,15 @@ public class Spellbook {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        sortSpellBook();
+        StringBuilder spellString = new StringBuilder("");
+        for (Spell s : spellList) {
+            spellString.append(s.toString() + "%n");
+        }
+        return spellString.toString();
     }
 }

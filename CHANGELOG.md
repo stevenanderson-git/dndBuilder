@@ -1,3 +1,12 @@
+2020-08-30
+Updated
+* characterFiles -> changed to characterbuilder to update naming schemes
+* added characterbuilderinfo to keep notes of ideas during build process
+* SpellScribe class added. Will be used to create spells. Spells will be added to a list of spells for the current d20 system.
+* Restructured files based on control model view
+* added .gitignore
+
+
 2020-08-27
 Added
 * Finished Spell.toString()

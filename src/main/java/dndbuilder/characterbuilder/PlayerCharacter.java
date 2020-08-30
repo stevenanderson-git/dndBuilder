@@ -1,4 +1,6 @@
-package characterFiles;
+package characterbuilder;
+
+import spellbuilder.Spell;
 
 /**
  * Version: 0.1.Alpha 2020/08/27 Steven Anderson
@@ -54,6 +56,13 @@ public class PlayerCharacter {
         skills = new Skill[] { acrobatics, animalHandling, arcana, athletics, deception, history, insight, intimidation,
                 investigation, medicine, nature, perception, performance, persuasion, religion, sleightOfHand, stealth,
                 survival };
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Name: %s %nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s%nSpells:%n%s",
+                getCharacterName(), getCharacterLevel(), levelList.toString(), levelList.getProficiencyBonus(),
+                printArray(attributes), printArray(skills), spellbook.toString());
     }
 
     /**
@@ -225,12 +234,5 @@ public class PlayerCharacter {
             arrayString.append(o[i].toString());
         }
         return arrayString.toString();
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Name: %s %nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s",
-                getCharacterName(), getCharacterLevel(), levelList.toString(), levelList.getProficiencyBonus(),
-                printArray(attributes), printArray(skills));
     }
 }

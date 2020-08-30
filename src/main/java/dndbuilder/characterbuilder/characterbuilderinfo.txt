@@ -1,0 +1,1 @@
+This builder will be what builds a player character. Items, spells, classes, heritages will all be created separetly
