@@ -1,6 +1,6 @@
-package characterbuilder;
+package dndbuilder.characterbuilder;
 
-import spellbuilder.Spell;
+import dndbuilder.spellbuilder.Spell;
 
 /**
  * Version: 0.1.Alpha 2020/08/27 Steven Anderson

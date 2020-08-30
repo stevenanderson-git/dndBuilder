@@ -1,8 +1,8 @@
-package characterbuilder;
+package dndbuilder.characterbuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import spellbuilder.Spell;
+import dndbuilder.spellbuilder.Spell;
 
 /**
  * Version: 0.1.Alpha 2020/08/27 Steven Anderson The Spellbook holds all the

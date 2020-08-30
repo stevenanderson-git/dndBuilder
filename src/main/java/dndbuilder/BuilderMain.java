@@ -1,7 +1,7 @@
 package dndbuilder;
 
-import characterbuilder.PlayerCharacter;
-import spellbuilder.SpellScribe;
+import dndbuilder.characterbuilder.PlayerCharacter;
+import dndbuilder.spellbuilder.SpellScribe;
 
 /**
  * Version: 0.1.Alpha 2020/08/27 Steven Anderson

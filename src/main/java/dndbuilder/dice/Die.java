@@ -1,4 +1,4 @@
-package diceRNG;
+package dndbuilder.dice;
 
 /**
  * Version: 0.1.Alpha 2020/08/27 Steven Anderson

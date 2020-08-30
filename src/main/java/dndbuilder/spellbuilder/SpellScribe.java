@@ -1,4 +1,4 @@
-package spellbuilder;
+package dndbuilder.spellbuilder;
 
 /**
  * Version: 0.1.Alpha 2020/08/30 Steven Anderson
