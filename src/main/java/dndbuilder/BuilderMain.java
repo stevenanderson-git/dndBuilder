@@ -1,3 +1,5 @@
+package dndbuilder;
+
 import characterbuilder.PlayerCharacter;
 import spellbuilder.SpellScribe;
 
