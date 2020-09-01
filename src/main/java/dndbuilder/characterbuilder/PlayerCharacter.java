@@ -14,6 +14,8 @@ public class PlayerCharacter {
     private Boolean inspiration;
     private String characterName;
     private Heritage heritage;
+    private CharacterBackground characterBackground;
+    private CharacterAlignment characterAlignment;
     private Attribute[] attributes;
     private Skill[] skills;
     private Spellbook spellbook;
@@ -25,6 +27,8 @@ public class PlayerCharacter {
         levelList = new LevelList();
         spellbook = new Spellbook();
         heritage = new Heritage("Human");
+        characterBackground = new CharacterBackground("I am a programmer!");
+        characterAlignment = new CharacterAlignment("Lawful Good");// should be lawful evil
         // Initialize and add player attributes to the array
         Attribute strength = new Attribute("Strength", 10);
         Attribute dexterity = new Attribute("Dexterity", 10);
@@ -60,9 +64,23 @@ public class PlayerCharacter {
 
     @Override
     public String toString() {
-        return String.format("Name: %s %nLevel %s %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s%nSpells:%n%s",
-                getCharacterName(), getCharacterLevel(), levelList.toString(), levelList.getProficiencyBonus(),
-                printArray(attributes), printArray(skills), spellbook.toString());
+        return String.format(
+                "Name: %s %nLevel %s %s%nBackground: %s | Alignment: %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s%nSpells:%n%s",
+                getCharacterName(), getCharacterLevel(), getCharacterBackground(), getCharacterAlignment(),
+                levelList.toString(), levelList.getProficiencyBonus(), printArray(attributes), printArray(skills),
+                spellbook.toString());
+    }
+
+    /**
+     * Returns a String[] for GUI shortlist
+     * 
+     * TODO: find a better way to get this info?
+     * 
+     * @return {Name, Level, Alignment, Background}
+     */
+    public String[] getCharacterShortInfo() {
+        return new String[] { getCharacterName(), getCharacterLevel(), getCharacterAlignment(),
+                getCharacterBackground() };
     }
 
     /**
@@ -234,5 +252,18 @@ public class PlayerCharacter {
             arrayString.append(o[i].toString());
         }
         return arrayString.toString();
+    }
+
+    /**
+     * TODO: further implementation needed in CharacterBackground
+     * 
+     * @return String value of the Character's Background
+     */
+    public String getCharacterBackground() {
+        return characterBackground.toString();
+    }
+
+    public String getCharacterAlignment() {
+        return characterAlignment.toString();
     }
 }

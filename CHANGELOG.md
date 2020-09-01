@@ -1,3 +1,11 @@
+2020-09-01
+Added
+* CharacterBackground & CharacterAlignment as placeholders for visual updates and space
+* GUI work continued, CharacterStats tab is being populated
+* CharacterBriefPanel added - shows overview of character details
+* MainMenuBar - options (new character, quit)
+
+
 2020-08-30
 Updated
 * characterFiles -> changed to characterbuilder to update naming schemes

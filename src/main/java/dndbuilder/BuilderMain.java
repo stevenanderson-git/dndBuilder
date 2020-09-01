@@ -18,4 +18,8 @@ class BuilderMain {
         // https://stackoverflow.com/questions/44665924/java-awt-eventqueue-invokelater-cant-understand-the-syntax
         EventQueue.invokeLater(() -> controller.displayGUI());
     }
+
+    private BuilderMain() {
+        // Does nothing, example taken from Carcassonne project
+    }
 }
