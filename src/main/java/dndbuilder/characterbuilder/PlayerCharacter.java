@@ -65,7 +65,7 @@ public class PlayerCharacter {
     @Override
     public String toString() {
         return String.format(
-                "Name: %s %nLevel %s %s%nBackground: %s | Alignment: %s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s%nSpells:%n%s",
+                "Name: %s %nLevel %s %nBackground: %s | Alignment: %s%nClass List: %n%s%nProficiency Bonus: %s%nAttributes:%n%s%nSkills:%n%s%nSpells:%n%s",
                 getCharacterName(), getCharacterLevel(), getCharacterBackground(), getCharacterAlignment(),
                 levelList.toString(), levelList.getProficiencyBonus(), printArray(attributes), printArray(skills),
                 spellbook.toString());

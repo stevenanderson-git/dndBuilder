@@ -1,7 +1,10 @@
 package dndbuilder.view.main_gui;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -10,12 +13,14 @@ import dndbuilder.control.MainController;
 public class MainGUI extends JFrame {
     private static final Dimension MINIMUM_WINDOW_SIZE = new Dimension(500, 500);
     private final MainController controller;
-    private JTabbedPane tabbedPane;
+    private CharacterBriefPanel cbp;
 
-    private StatPanel characterStats;
+    private JPanel characterStats;
 
     public MainGUI(MainController controller) {
         this.controller = controller;
+        // cbp will be at the top of most of the panes
+        cbp = new CharacterBriefPanel(controller.getCharacterShortInfo());
         buildFrame();
     }
 
@@ -33,20 +38,16 @@ public class MainGUI extends JFrame {
         setJMenuBar(new MainMenuBar(controller, this));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        addTabbedPane();
+        addStatPanel();
         setMinimumSize(MINIMUM_WINDOW_SIZE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    private void addTabbedPane() {
-        tabbedPane = new JTabbedPane();
-        tabbedPane.setTabPlacement(JTabbedPane.LEFT);
-        characterStats = new StatPanel();
-        tabbedPane.add(characterStats, "Character Stats");
+    private void addStatPanel() {
+        characterStats = new StatPanel(cbp, controller);
+        //ImageIcon statIcon = createImage
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+        tabbedPane.add(characterStats);
         add(tabbedPane, BorderLayout.CENTER);
-    }
-
-    public void populateStatPanel() {
-        characterStats.addCharacterInfo(controller.getCharacterInfo());
     }
 }

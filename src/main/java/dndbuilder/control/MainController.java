@@ -8,7 +8,7 @@ public class MainController {
     private PlayerCharacter playerCharacter;
 
     public MainController() {
-        // playerCharacter = new PlayerCharacter();
+        newCharacter();
         mainGUI = new MainGUI(this);
 
     }
@@ -30,7 +30,6 @@ public class MainController {
     public void newCharacter() {
         // TODO: Add check to save if a character is !null
         playerCharacter = new PlayerCharacter();
-        mainGUI.populateStatPanel();
     }
 
     public String[] getCharacterShortInfo() {
