@@ -242,6 +242,24 @@ public class PlayerCharacter {
     }
 
     /**
+     * A PlayerCharacter's Attributes list
+     * 
+     * @return String of attributes
+     */
+    public String getAttributes() {
+        return printArray(attributes);
+    }
+
+    /**
+     * A PlayerCharacter's Skills list
+     * 
+     * @return string of skills
+     */
+    public String getSkills() {
+        return printArray(skills);
+    }
+
+    /**
      * Iterate through an array
      * 
      * @return StringBuilder String of Objects' toString
